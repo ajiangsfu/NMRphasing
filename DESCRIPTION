@@ -1,0 +1,19 @@
+Package: NMRphasing
+Type: Package
+Title: Phase error correction and baseline correction for 1D NMR data
+Version: 0.0.1
+Author: Aixiang Jiang
+Maintainer: Aixiang Jiang <aijiang@bccrc.ca> <aixiang.jiang@pathology.ubc.ca> 
+Depends: R (>= 3.5)
+Suggests: knitr 
+VignetteBuilder: knitr
+Imports: baseline, splines, MassSpecWavelet
+Description: This package provides three types of phase error correction approaches:
+    a) a single linear model with choices of several optimization functions
+    b) multiple linear models with choices of several optimization functions
+    c) shrinkage
+    It also provides polynomial baseline correction.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1
