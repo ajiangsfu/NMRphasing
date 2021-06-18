@@ -1,7 +1,7 @@
 Package: NMRphasing
 Type: Package
 Title: Phase error correction and baseline correction for 1D NMR data
-Version: 0.0.1
+Version: 0.0.2
 Author: Aixiang Jiang
 Maintainer: Aixiang Jiang <aijiang@bccrc.ca> <aixiang.jiang@pathology.ubc.ca> 
 Depends: R (>= 3.5)

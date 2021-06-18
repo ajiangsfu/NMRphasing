@@ -12,7 +12,7 @@ NMRphasing(
 }
 \arguments{
 \item{specDatIn}{Input spectrum data, which can be one of the four formats:
-a vector of absorption specrtrum; a complex vector; a data matrix or a data frame with two columns of spectrum data,
+a vector of absorption spectrum; a complex vector; a data matrix or a data frame with two columns of spectrum data,
 which 1st column is for absorption spectrum, and 2nd column is for dispersion spectrum}
 
 \item{absorptionOnly}{A logical variable to tell us if specDatIn is a a vector of absorption specrtrum, default is false}
