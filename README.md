@@ -11,6 +11,7 @@ There are currently seven NMR phase error correction methods implemented in this
 "NLS", "MPC_DAOM", "MPC_EMP", "SPC_DAOM", "SPC_EMP", "SPC_AAM", and "SPC_DSM"
 
 ### 1. NLS
+This is to use Shrinakge method to do phase error correction
 
 
 ### 2. MPC_DAOM
