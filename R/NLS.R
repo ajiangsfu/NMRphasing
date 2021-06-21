@@ -1,16 +1,19 @@
 #' NLS
 #' @description Non-linear shrinkage
 #' @details This function is to process phase error correction through non-linear shrinkage,
-#' followed by Polynomial baseline correction
+#' followed by Polynomial baseline correction when necessary
 #' @param specdat A complex number vector of observed frequency domain data
 #' @return A matrix with phase and baseline corrected spectra, the 1st column is for absorption spectrum, while the 2nd column is for dispersion spectrum.
 #' @keywords 1D NMR, phase correction
 #' @author Aixiang Jiang
 #' @references
-#' This is out new algorithm
+#' Jiang A, Hanley JA, and Nadon R, 2021, 1D NMR Phase Error Correction with New Modeling Methods (in preparation)
 #'
-#' Kristian Hovde Liland, Trygve Almøy, Bjørn-Helge Mevik (2010), Optimal Choice of Baseline
+#' Jiang A, Gravel A, Hanley JA, and Nadon R, 2021, Comparing phase error correction methods with NMR spike-in experiments (in preparation)
+#'
+#' Liland KH, Almøy T, Mevik B (2010), Optimal Choice of Baseline
 #' Correction for Multivariate Calibration of Spectra, Applied Spectroscopy 64, pp. 1007-1016.
+#'
 #' @export
 
 
@@ -21,8 +24,7 @@ NLS = function(specdat){
   mm=sqrt(pp)
 
   peakIndex=peakSearch(mm)
-  #### note on Aug 17, 2017: by mistake, for method 5-6, I was using pp, but should use mm instead
-  #### do I need to change and re-do for all simulations?
+
   k=length(peakIndex)
 
   peak1=peakIndex[-k]

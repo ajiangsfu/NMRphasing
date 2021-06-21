@@ -13,18 +13,22 @@ MPC_EMP(specdat)
 A matrix with phase and baseline corrected spectra, the 1st column is for absorption spectrum, while the 2nd column is for dispersion spectrum.
 }
 \description{
-Multiple single linear models with entropy minimization with negative peak penalty
+Multiple single linear models based on entropy minimization with negative peak penalty
 }
 \details{
 This function is to process phase error correction through multiple single linear models with entropy minimization with negative peak penalty,
-followed by Polynomial baseline correction
+followed by Polynomial baseline correction when necessary
 }
 \references{
-This is our new algorithm
+Jiang A, Hanley JA, and Nadon R, 2021, 1D NMR Phase Error Correction with New Modeling Methods (in preparation)
+
+Jiang A, Gravel A, Hanley JA, and Nadon R, 2021, Comparing phase error correction methods with NMR spike-in experiments (in preparation)
+
+Binczyk F, Tarnawski R, Polanska J (2015) Strategies for optimizing the phase correction algorithms in Nuclear Magnetic Resonance spectroscopy. Biomed Eng Online 14 Suppl 2:S5.
 
 de Brouwer, H. (2009). Evaluation of algorithms for automated phase correction of NMR spectra. J Magn Reson, 201, 230-238.
 
-Kristian Hovde Liland, Trygve Almøy, Bjørn-Helge Mevik (2010), Optimal Choice of Baseline
+Liland KH, Almøy T, Mevik B (2010), Optimal Choice of Baseline
 Correction for Multivariate Calibration of Spectra, Applied Spectroscopy 64, pp. 1007-1016.
 }
 \author{

@@ -1,17 +1,20 @@
 #' MPC_DAOM
 #' @description Multiple linear models with Minimization of difference between absolute area and ordinary area
 #' @details This function is to process phase error correction through multiple linear models with Minimization of difference between absolute area and ordinary area,
-#' followed by Polynomial baseline correction
+#' followed by Polynomial baseline correction when necessary
 #' @param specdat A complex number vector of observed frequency domain data
 #' @return A matrix with phase and baseline corrected spectra, the 1st column is for absorption spectrum, while the 2nd column is for dispersion spectrum.
 #' @keywords 1D NMR, phase correction
 #' @author Aixiang Jiang
 #' @references
 #'
-#' This is our new algorithm
+#' Jiang A, Hanley JA, and Nadon R, 2021, 1D NMR Phase Error Correction with New Modeling Methods (in preparation)
 #'
-#' Kristian Hovde Liland, Trygve Almøy, Bjørn-Helge Mevik (2010), Optimal Choice of Baseline
+#' Jiang A, Gravel A, Hanley JA, and Nadon R, 2021, Comparing phase error correction methods with NMR spike-in experiments (in preparation)
+#'
+#' Liland KH, Almøy T, Mevik B (2010), Optimal Choice of Baseline
 #' Correction for Multivariate Calibration of Spectra, Applied Spectroscopy 64, pp. 1007-1016.
+#'
 #' @export
 
 

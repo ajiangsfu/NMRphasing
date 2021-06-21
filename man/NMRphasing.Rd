@@ -30,17 +30,21 @@ Phase error correction wrap up function
 This is a wrap function to process phase error correction with seven different choices, followed by Polynomial baseline correction when necessary
 }
 \references{
-de Brouwer, H. (2009). Evaluation of algorithms for automated phase correction of NMR spectra. J Magn Reson, 201, 230-238.
+Jiang A, Hanley JA, and Nadon R, 2021, 1D NMR Phase Error Correction with New Modeling Methods (in preparation)
 
-Dzakula, Z. (2000). Phase angle measurement from peak areas (PAMPAS). J Magn Reson, 146, 20-32.
+Jiang A, Gravel A, Hanley JA, and Nadon R, 2021, Comparing phase error correction methods with NMR spike-in experiments (in preparation)
 
-Chen, L., Weng, Z., Goh, L., & Garland, M. (2002). An efficient algorithm for automatic phase correction of NMR spectra based on
-entropy minimization. Journal of Magnetic Resonance, 158, 1-2.
+Binczyk F, Tarnawski R, Polanska J (2015) Strategies for optimizing the phase correction algorithms in Nuclear Magnetic Resonance spectroscopy. Biomed Eng Online 14 Suppl 2:S5.
 
-Ernst, R. R. (1969). Numerical Hilbert transform and automatic phase correction in magnetic resonance spectroscopy.
-Journal of Magnetic Resonance, 1, 7-26
+Chen L, Weng Z, Goh L, Garland M (2002) An efficient algorithm for automatic phase correction of NMR spectra based on entropy minimization. J Magn Reson 158:164–168.
 
-Kristian Hovde Liland, Trygve Almøy, Bjørn-Helge Mevik (2010), Optimal Choice of Baseline
+de Brouwer H (2009) Evaluation of algorithms for automated phase correction of NMR spectra. J Magn Reson 201:230–238.
+
+Džakula Ž (2000) Phase Angle Measurement from Peak Areas (PAMPAS). J Magn Reson 146:20–32.
+
+Ernst RR (1969) Numerical Hilbert transform and automatic phase correction in magnetic resonance spectroscopy. J Magn Reson 1969 1:7–26.
+
+Liland KH, Almøy T, Mevik B (2010), Optimal Choice of Baseline
 Correction for Multivariate Calibration of Spectra, Applied Spectroscopy 64, pp. 1007-1016.
 }
 \author{
@@ -48,13 +52,6 @@ Aixiang Jiang
 }
 \keyword{1D}
 \keyword{NMR,}
-\keyword{a}
-\keyword{absolute}
-\keyword{area}
-\keyword{correction,}
-\keyword{linear}
-\keyword{minimization}
-\keyword{model,}
-\keyword{of}
+\keyword{correction}
+\keyword{error}
 \keyword{phase}
-\keyword{single}

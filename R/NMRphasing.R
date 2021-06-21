@@ -8,35 +8,30 @@
 #' @param method One of phase correction method. There are seven methods right now, which are "NLS", "MPC_DAOM", "MPC_EMP", "SPC_DAOM", "SPC_EMP", "SPC_AAM", "SPC_DSM",
 #'               with NLS, non-linear shrinkage as default
 #' @return A matrix with phase and baseline corrected spectra, the 1st column is for absorption spectrum, while the 2nd column is for dispersion spectrum.
-#' @keywords 1D NMR, phase correction, a single linear model, minimization of absolute area
+#' @keywords 1D NMR, phase error correction
 #' @author Aixiang Jiang
 #' @references
-#' de Brouwer, H. (2009). Evaluation of algorithms for automated phase correction of NMR spectra. J Magn Reson, 201, 230-238.
+#' Jiang A, Hanley JA, and Nadon R, 2021, 1D NMR Phase Error Correction with New Modeling Methods (in preparation)
 #'
-#' Dzakula, Z. (2000). Phase angle measurement from peak areas (PAMPAS). J Magn Reson, 146, 20-32.
+#' Jiang A, Gravel A, Hanley JA, and Nadon R, 2021, Comparing phase error correction methods with NMR spike-in experiments (in preparation)
 #'
-#' Chen, L., Weng, Z., Goh, L., & Garland, M. (2002). An efficient algorithm for automatic phase correction of NMR spectra based on
-#' entropy minimization. Journal of Magnetic Resonance, 158, 1-2.
+#' Binczyk F, Tarnawski R, Polanska J (2015) Strategies for optimizing the phase correction algorithms in Nuclear Magnetic Resonance spectroscopy. Biomed Eng Online 14 Suppl 2:S5.
 #'
-#' Ernst, R. R. (1969). Numerical Hilbert transform and automatic phase correction in magnetic resonance spectroscopy.
-#' Journal of Magnetic Resonance, 1, 7-26
+#' Chen L, Weng Z, Goh L, Garland M (2002) An efficient algorithm for automatic phase correction of NMR spectra based on entropy minimization. J Magn Reson 158:164–168.
 #'
-#' Kristian Hovde Liland, Trygve Almøy, Bjørn-Helge Mevik (2010), Optimal Choice of Baseline
+#' de Brouwer H (2009) Evaluation of algorithms for automated phase correction of NMR spectra. J Magn Reson 201:230–238.
+#'
+#' Džakula Ž (2000) Phase Angle Measurement from Peak Areas (PAMPAS). J Magn Reson 146:20–32.
+#'
+#' Ernst RR (1969) Numerical Hilbert transform and automatic phase correction in magnetic resonance spectroscopy. J Magn Reson 1969 1:7–26.
+#'
+#' Liland KH, Almøy T, Mevik B (2010), Optimal Choice of Baseline
 #' Correction for Multivariate Calibration of Spectra, Applied Spectroscopy 64, pp. 1007-1016.
-#'
 #'
 #' @export
 
 
 NMRphasing = function (specDatIn, absorptionOnly = FALSE, method = c("NLS", "MPC_DAOM", "MPC_EMP", "SPC_DAOM", "SPC_EMP", "SPC_AAM", "SPC_DSM")){
-  ## this function can accept three formats of specDatIn
-  ## specDatIn can be a vector of absorption specrtrum, a complex vector, or a data matrix/frame with two columns of spectrum data
-  ##       if it is a data frame or data matrix, the 1st column for absorption, and the 2nd column is for dispersion
-  ## right now, there are only 7 fixed methods, in the future, should allow users to choose:
-  ##  i) single linear model, or multiple linear models, or NLS (shrinkage) that can not be combined with the 2) step though
-  ##  ii) one of optimization functions, right now, only 4 of them, should add more
-  ##  iii) detect baseline bias and then use polynomial methods to correct it, or without detection step
-  ##           or maybe add more choices including no baseline correction choices in the future
   datin = NA
   if(absorptionOnly){
     datin = HilbertWithFT(specDatIn)
@@ -48,7 +43,6 @@ NMRphasing = function (specDatIn, absorptionOnly = FALSE, method = c("NLS", "MPC
 
   outdat = NA
 
-  ### the following part is for choices of 7 methods, all of them should have a output object: outdat
   if(method == "MPC_DAOM"){
     outdat = MPC_DAOM(specdat = datin)
   }else if(method == "MPC_EMP"){

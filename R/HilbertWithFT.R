@@ -14,7 +14,7 @@ HilbertWithFT = function(absorptionIn){
   af=fft(at)
   ### a complex vector containing both absorption and dispersion,
   ### to get the same scale as input
-  af = af/length(absorptionIn)  ### add this line on 20200806
+  af = af/length(absorptionIn)
 
   return(af)
 }

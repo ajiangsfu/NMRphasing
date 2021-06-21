@@ -20,9 +20,11 @@ This function is to process phase error correction through a single linear model
 followed by Polynomial baseline correction
 }
 \references{
+Binczyk F, Tarnawski R, Polanska J (2015) Strategies for optimizing the phase correction algorithms in Nuclear Magnetic Resonance spectroscopy. Biomed Eng Online 14 Suppl 2:S5.
+
 de Brouwer, H. (2009). Evaluation of algorithms for automated phase correction of NMR spectra. J Magn Reson, 201, 230-238.
 
-Kristian Hovde Liland, Trygve Almøy, Bjørn-Helge Mevik (2010), Optimal Choice of Baseline
+Liland KH, Almøy T, Mevik B (2010), Optimal Choice of Baseline
 Correction for Multivariate Calibration of Spectra, Applied Spectroscopy 64, pp. 1007-1016.
 }
 \author{

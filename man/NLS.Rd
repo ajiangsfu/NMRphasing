@@ -17,12 +17,14 @@ Non-linear shrinkage
 }
 \details{
 This function is to process phase error correction through non-linear shrinkage,
-followed by Polynomial baseline correction
+followed by Polynomial baseline correction when necessary
 }
 \references{
-This is out new algorithm
+Jiang A, Hanley JA, and Nadon R, 2021, 1D NMR Phase Error Correction with New Modeling Methods (in preparation)
 
-Kristian Hovde Liland, Trygve Almøy, Bjørn-Helge Mevik (2010), Optimal Choice of Baseline
+Jiang A, Gravel A, Hanley JA, and Nadon R, 2021, Comparing phase error correction methods with NMR spike-in experiments (in preparation)
+
+Liland KH, Almøy T, Mevik B (2010), Optimal Choice of Baseline
 Correction for Multivariate Calibration of Spectra, Applied Spectroscopy 64, pp. 1007-1016.
 }
 \author{
