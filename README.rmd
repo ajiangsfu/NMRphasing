@@ -181,6 +181,7 @@ p2 = ggplot(psout, aes(x = ppm, y = Phased_Absoprtion)) +
 ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),nrow = 2, ncol=1)
 
 ```
+
 SPC_DSM performs the worst on phase error correction based on our example data.
 
 

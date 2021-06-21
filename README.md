@@ -191,8 +191,9 @@ summation minimization.
             panel.background = element_blank(), axis.line = element_line(colour = "black"))
     ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),nrow = 2, ncol=1)
 
-![](README_files/figure-markdown_strict/unnamed-chunk-10-1.png) SPC\_DSM
-performs the worst on phase error correction based on our example data.
+![](README_files/figure-markdown_strict/unnamed-chunk-10-1.png) 
+
+SPC\_DSM performs the worst on phase error correction based on our example data.
 
 Side note: with a single CPU, it takes about 10 minutes to process all R
 code.
