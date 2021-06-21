@@ -1,18 +1,18 @@
 ---
 title: "NMRphasing"
 author: "Aixiang Jiang"
-date: "June 20, 2021"
+date: "June 21, 2021"
 output: md_document
 ---
 
 
 # NMRphasing
-R package for NMR data phase error correction
+R package for NMR data phase error correction. Although this is targeting on 1D NMR data, it can be applied to 2D and 3D NMR data when we work on 1D data at a time.
 
 
 ## I. NMRphasing installation
 
-First of all, make sure that you have R package MassSpecWavelet, which NMRphasing depends on. Example code to install MassSpecWavelet is: 
+First of all, make sure that you have R package MassSpecWavelet that NMRphasing depends on. Example code to install MassSpecWavelet is: 
 
 if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
 BiocManager::install("MassSpecWavelet")
@@ -21,7 +21,8 @@ BiocManager::install("MassSpecWavelet")
 Now, let's install NMRphasing from Github
 
 ```{r eval = FALSE}
-devtools :: install_github(repo = "ajiangsfu/NMRphasing",force = TRUE)  ## if you do not have old versions of NMRphasing, please remove force = TRUE
+devtools :: install_github(repo = "ajiangsfu/NMRphasing",force = TRUE)  
+## if you do not have old versions of NMRphasing, please remove force = TRUE
 ```
 
 ## II. Data format
@@ -32,44 +33,51 @@ The input data format should be in one of the four formats:
 3) a data matrix with two columns of spectrum data, the 1st column is for absorption spectrum, and 2nd column is for dispersion spectrum
 4) a data frame with two columns of spectrum data, the 1st column is for absorption spectrum, and 2nd column is for dispersion spectrum
 
-An example data can be loaded after installing NMRphasing:
+An example data from our multiple metabolite spike-in experiment can be loaded after installing NMRphasing:
+
 ```{r}
 library(NMRphasing)
 load(system.file("extdata", "fdat.rda", package = "NMRphasing"))
 str(fdat)
 ```
 
-Here, fdat$frequency_domain is the data for the following illustration, which is a complex vector. In order to make comparison, absorption part can be extracted
+Here, fdat$frequency_domain is the data for the following illustration, which is a complex vector. 
+
 ```{r}
-Obs_absorption = Re(fdat$frequency_domain)
+## the following three lines are trying to avoid any possible conflict to the original data, and do not occupy extra space
+psout = fdat
+rm(fdat)
+gc()
+
+## in order to make comparison, absorption part can be extracted
+psout$Observed_Absorption = Re(psout$frequency_domain)
+
+library(ggpubr)
+p1 = ggplot(psout, aes(x = ppm, y = Observed_Absorption)) +
+      geom_line() + theme_bw() + labs(y = "Observed Absorption") +
+      theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"))
+p1
 ```
 
+The observed absorption spectrum without phase error correction looks very bad.
 
 
 ## III. Example code
 
-There are currently seven NMR phase error correction methods implemented in this package:
-"NLS", "MPC_DAOM", "MPC_EMP", "SPC_DAOM", "SPC_EMP", "SPC_AAM", and "SPC_DSM"
+There are currently seven NMR phase error correction methods implemented in this package, they are:"SPC_DAOM","NLS", "MPC_DAOM", "MPC_EMP", "SPC_EMP", "SPC_AAM", and "SPC_DSM".
 
-### 1. NLS
+### 1. SPC_DAOM
 
-This is to use our new Shrinkage method to do phase error correction.
+This is to use the traditional single linear model approach for phase error correction but with our new optimization function to minimize difference between absolute area and ordinary area.
+
 ```{r}
-nlsp = NMRphasing(specDatIn = fdat$frequency_domain, method = "NLS") ## NLS is the default method, method setting can be ignored
+psout$Phased_Absoprtion = NMRphasing(specDatIn = psout$frequency_domain, method = "SPC_DAOM") 
+### this step might take a couple of minutes
 
 ### plot to compare before and after phase error correction
 
-nlsdat = cbind(fdat$ppm, Obs_absorption, nlsp)
-nlsdat = data.frame(nlsdat)
-colnames(nlsdat) = c("ppm", "Observed_Absorption", "Phased_Absoprtion")
-
-library(ggpubr)
-
-p1 = ggplot(nlsdat, aes(x = ppm, y = Observed_Absorption)) +
-      geom_line() + theme_bw() + labs(y = "Observed Absorption") +
-      theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-        panel.background = element_blank(), axis.line = element_line(colour = "black"))
-p2 = ggplot(nlsdat, aes(x = ppm, y = Phased_Absoprtion)) +
+p2 = ggplot(psout, aes(x = ppm, y = Phased_Absoprtion)) +
       geom_line() + theme_bw() + labs(y = "Phased Absoprtion") +
         theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_blank(), axis.line = element_line(colour = "black"))
@@ -77,23 +85,17 @@ ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),nrow = 2, ncol=1)
 
 ```
 
-### 2. MPC_DAOM
+### 2. NLS
 
-This is to use our new multiple linear model approach with our new optimization function to minimize difference between absolute area and ordinary area.
+This is our new shrinkage method, which is the fastest phase error correction method since it does not involve any optimization step.
+
+
 ```{r}
-mdaomp = NMRphasing(specDatIn = fdat$frequency_domain, method = "MPC_DAOM") 
-## this step might take a couple of minutes
+psout$Phased_Absoprtion = NMRphasing(specDatIn = psout$frequency_domain, method = "NLS") 
+## this is the default method, therefore, the method setting can be ignored
 
 ### plot to compare before and after phase error correction
-
-pdat = nlsdat
-pdat$Phased_Absoprtion = mdaomp
-
-p1 = ggplot(pdat, aes(x = ppm, y = Observed_Absorption)) +
-      geom_line() + theme_bw() + labs(y = "Observed Absorption") +
-      theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-        panel.background = element_blank(), axis.line = element_line(colour = "black"))
-p2 = ggplot(pdat, aes(x = ppm, y = Phased_Absoprtion)) +
+p2 = ggplot(psout, aes(x = ppm, y = Phased_Absoprtion)) +
       geom_line() + theme_bw() + labs(y = "Phased Absoprtion") +
         theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_blank(), axis.line = element_line(colour = "black"))
@@ -101,22 +103,17 @@ ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),nrow = 2, ncol=1)
 
 ```
 
-### 3. MPC_EMP
+### 3. MPC_DAOM
 
-This is our new multiple linear model approach based on entropy minimization with negative peak penalty
+This is our new multiple linear model approach for phase error correction with our new optimization function to minimize difference between absolute area and ordinal area.
+
 ```{r}
-mempp = NMRphasing(specDatIn = fdat$frequency_domain, method = "MPC_EMP") 
+psout$Phased_Absoprtion = NMRphasing(specDatIn = psout$frequency_domain, method = "MPC_DAOM") 
 ## this step might take a couple of minutes
 
 ### plot to compare before and after phase error correction
 
-pdat$Phased_Absoprtion = mempp
-
-p1 = ggplot(pdat, aes(x = ppm, y = Observed_Absorption)) +
-      geom_line() + theme_bw() + labs(y = "Observed Absorption") +
-      theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-        panel.background = element_blank(), axis.line = element_line(colour = "black"))
-p2 = ggplot(pdat, aes(x = ppm, y = Phased_Absoprtion)) +
+p2 = ggplot(psout, aes(x = ppm, y = Phased_Absoprtion)) +
       geom_line() + theme_bw() + labs(y = "Phased Absoprtion") +
         theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_blank(), axis.line = element_line(colour = "black"))
@@ -124,23 +121,18 @@ ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),nrow = 2, ncol=1)
 
 ```
 
-### 4. SPC_DAOM
 
-This phase error correction method is based on the traditional single model approach but with our new optimization function to minimize difference between absolute area and ordinal area.
+### 4. MPC_EMP
+
+This is our new multiple linear model approach for phase error correction based on an existing optimization function: entropy minimization with negative peak penalty.
 
 ```{r}
-daomp = NMRphasing(specDatIn = fdat$frequency_domain, method = "SPC_DAOM") 
+psout$Phased_Absoprtion = NMRphasing(specDatIn = psout$frequency_domain, method = "MPC_EMP") 
 ## this step might take a couple of minutes
 
 ### plot to compare before and after phase error correction
 
-pdat$Phased_Absoprtion = daomp
-
-p1 = ggplot(pdat, aes(x = ppm, y = Observed_Absorption)) +
-      geom_line() + theme_bw() + labs(y = "Observed Absorption") +
-      theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-        panel.background = element_blank(), axis.line = element_line(colour = "black"))
-p2 = ggplot(pdat, aes(x = ppm, y = Phased_Absoprtion)) +
+p2 = ggplot(psout, aes(x = ppm, y = Phased_Absoprtion)) +
       geom_line() + theme_bw() + labs(y = "Phased Absoprtion") +
         theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_blank(), axis.line = element_line(colour = "black"))
@@ -150,21 +142,15 @@ ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),nrow = 2, ncol=1)
 
 ### 5. SPC_EMP
 
-This is an old phase error method based on the traditional single model approach targeting on entropy minimization with negative peak penalty
+This is an old phase error correction method based on the traditional single model approach targeting on an existing optimization function: entropy minimization with negative peak penalty.
 
 ```{r}
-empp = NMRphasing(specDatIn = fdat$frequency_domain, method = "SPC_EMP") 
+psout$Phased_Absoprtion = NMRphasing(specDatIn = psout$frequency_domain, method = "SPC_EMP") 
 ## this step might take a couple of minutes
 
 ### plot to compare before and after phase error correction
 
-pdat$Phased_Absoprtion = empp
-
-p1 = ggplot(pdat, aes(x = ppm, y = Observed_Absorption)) +
-      geom_line() + theme_bw() + labs(y = "Observed Absorption") +
-      theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-        panel.background = element_blank(), axis.line = element_line(colour = "black"))
-p2 = ggplot(pdat, aes(x = ppm, y = Phased_Absoprtion)) +
+p2 = ggplot(psout, aes(x = ppm, y = Phased_Absoprtion)) +
       geom_line() + theme_bw() + labs(y = "Phased Absoprtion") +
         theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_blank(), axis.line = element_line(colour = "black"))
@@ -174,21 +160,15 @@ ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),nrow = 2, ncol=1)
 
 ### 6. SPC_AAM
 
-This is an old phase error method based on the traditional single model approach with minimization on absolute area
+This is an old phase error correction method based on the traditional single model approach with an existing optimization function: absolute area minimization.
 
 ```{r}
-aamp = NMRphasing(specDatIn = fdat$frequency_domain, method = "SPC_AAM") 
+psout$Phased_Absoprtion = NMRphasing(specDatIn = psout$frequency_domain, method = "SPC_AAM") 
 ## this step might take a couple of minutes
 
 ### plot to compare before and after phase error correction
 
-pdat$Phased_Absoprtion = aamp
-
-p1 = ggplot(pdat, aes(x = ppm, y = Observed_Absorption)) +
-      geom_line() + theme_bw() + labs(y = "Observed Absorption") +
-      theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-        panel.background = element_blank(), axis.line = element_line(colour = "black"))
-p2 = ggplot(pdat, aes(x = ppm, y = Phased_Absoprtion)) +
+p2 = ggplot(psout, aes(x = ppm, y = Phased_Absoprtion)) +
       geom_line() + theme_bw() + labs(y = "Phased Absoprtion") +
         theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_blank(), axis.line = element_line(colour = "black"))
@@ -198,27 +178,26 @@ ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),nrow = 2, ncol=1)
 
 ### 7. SPC_DSM
 
-This is an old phase error method based on the traditional single model approach with dispersion summation minimization.
+This is an old phase error correction method based on the traditional single model approach with an existing optimization function: dispersion summation minimization.
 
 ```{r}
-dsmp = NMRphasing(specDatIn = fdat$frequency_domain, method = "SPC_DSM") 
+psout$Phased_Absoprtion = NMRphasing(specDatIn = psout$frequency_domain, method = "SPC_DSM") 
 ## this step might take a couple of minutes
 
 ### plot to compare before and after phase error correction
 
-pdat$Phased_Absoprtion = dsmp
-
-p1 = ggplot(pdat, aes(x = ppm, y = Observed_Absorption)) +
-      geom_line() + theme_bw() + labs(y = "Observed Absorption") +
-      theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-        panel.background = element_blank(), axis.line = element_line(colour = "black"))
-p2 = ggplot(pdat, aes(x = ppm, y = Phased_Absoprtion)) +
+p2 = ggplot(psout, aes(x = ppm, y = Phased_Absoprtion)) +
       geom_line() + theme_bw() + labs(y = "Phased Absoprtion") +
         theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_blank(), axis.line = element_line(colour = "black"))
 ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),nrow = 2, ncol=1)
 
 ```
+
+
+Based on the example data, SPC_DSM shows the worst phase error correction performance, NLS is the fastest algorithm and it is the only method that produces non-negative spectrum after phasing, SPC_DAOM and SPC_AAM perform quite well on phase error correction in general. 
+
+Side note: with a single CPU, it takes about 10 minutes to process all R code. 
 
 ## IV. NMRphasing R package general information
 
