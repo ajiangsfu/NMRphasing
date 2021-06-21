@@ -193,10 +193,12 @@ summation minimization.
 
 ![](README_files/figure-markdown_strict/unnamed-chunk-10-1.png) 
 
+
 SPC\_DSM performs the worst on phase error correction based on our example data.
 
-Side note: with a single CPU, it takes about 10 minutes to process all R
-code.
+Side notes:
+1) With a single CPU, it takes about 10 minutes to process all R code
+2) Files with higher resolution plots can be found within folder "docs", there are in three formats: pdf, word, and html
 
 ## IV. NMRphasing R package general information
 
