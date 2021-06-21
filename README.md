@@ -39,7 +39,7 @@ can be extracted
 
     Obs_absorption = Re(fdat$frequency_domain)
 
-## III.
+## III. Example code
 
 There are currently seven NMR phase error correction methods implemented
 in this package: “NLS”, “MPC\_DAOM”, “MPC\_EMP”, “SPC\_DAOM”,
