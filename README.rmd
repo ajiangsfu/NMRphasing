@@ -189,7 +189,7 @@ Side notes:
 
 a) With a single CPU, it takes about 10 minutes to process all R code
 
-b) Files with higher resolution plots can be found within folder "docs", there are in three formats: pdf, word, and html
+b) Instruction files with higher resolution plots can be found within folder "docs", there are in three formats: pdf, word, and html
 
 ## IV. NMRphasing R package general information
 
