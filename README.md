@@ -46,8 +46,8 @@ which is a complex vector.
     gc()
 
     ##           used (Mb) gc trigger (Mb) max used (Mb)
-    ## Ncells  604047 32.3    1250361 66.8   991073 53.0
-    ## Vcells 1497549 11.5    8388608 64.0  2205467 16.9
+    ## Ncells  604060 32.3    1250461 66.8   996366 53.3
+    ## Vcells 1497648 11.5    8388608 64.0  2207146 16.9
 
     ## in order to make comparison, absorption part can be extracted
     psout$Observed_Absorption = Re(psout$frequency_domain)
@@ -88,7 +88,7 @@ difference between absolute area and ordinary area.
           geom_line() + theme_bw() + labs(y = "Phased Absoprtion") +
             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
             panel.background = element_blank(), axis.line = element_line(colour = "black"))
-    ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),nrow = 2, ncol=1)
+    ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),font.label =12,nrow = 2, ncol=1)
 
 ![](README_files/figure-markdown_strict/unnamed-chunk-4-1.png)
 
@@ -104,7 +104,7 @@ correction method since it does not involve any optimization step.
           geom_line() + theme_bw() + labs(y = "Phased Absoprtion") +
             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
             panel.background = element_blank(), axis.line = element_line(colour = "black"))
-    ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),nrow = 2, ncol=1)
+    ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),font.label =12,nrow = 2, ncol=1)
 
 ![](README_files/figure-markdown_strict/unnamed-chunk-5-1.png)
 
@@ -121,7 +121,7 @@ between absolute area and ordinal area.
           geom_line() + theme_bw() + labs(y = "Phased Absoprtion") +
             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
             panel.background = element_blank(), axis.line = element_line(colour = "black"))
-    ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),nrow = 2, ncol=1)
+    ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),font.label =12,nrow = 2, ncol=1)
 
 ![](README_files/figure-markdown_strict/unnamed-chunk-6-1.png)
 
@@ -138,7 +138,7 @@ minimization with negative peak penalty.
           geom_line() + theme_bw() + labs(y = "Phased Absoprtion") +
             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
             panel.background = element_blank(), axis.line = element_line(colour = "black"))
-    ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),nrow = 2, ncol=1)
+    ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),font.label =12,nrow = 2, ncol=1)
 
 ![](README_files/figure-markdown_strict/unnamed-chunk-7-1.png)
 
@@ -155,7 +155,7 @@ entropy minimization with negative peak penalty.
           geom_line() + theme_bw() + labs(y = "Phased Absoprtion") +
             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
             panel.background = element_blank(), axis.line = element_line(colour = "black"))
-    ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),nrow = 2, ncol=1)
+    ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),font.label =12,nrow = 2, ncol=1)
 
 ![](README_files/figure-markdown_strict/unnamed-chunk-8-1.png)
 
@@ -172,7 +172,7 @@ area minimization.
           geom_line() + theme_bw() + labs(y = "Phased Absoprtion") +
             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
             panel.background = element_blank(), axis.line = element_line(colour = "black"))
-    ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),nrow = 2, ncol=1)
+    ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),font.label =12,nrow = 2, ncol=1)
 
 ![](README_files/figure-markdown_strict/unnamed-chunk-9-1.png)
 
@@ -189,18 +189,19 @@ summation minimization.
           geom_line() + theme_bw() + labs(y = "Phased Absoprtion") +
             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
             panel.background = element_blank(), axis.line = element_line(colour = "black"))
-    ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),nrow = 2, ncol=1)
+    ggarrange(plotlist = list(p1,p2),labels = c("Before","After"), font.label =12,nrow = 2, ncol=1)
 
-![](README_files/figure-markdown_strict/unnamed-chunk-10-1.png) 
+![](README_files/figure-markdown_strict/unnamed-chunk-10-1.png)
 
-
-SPC\_DSM performs the worst on phase error correction based on our example data.
+SPC\_DSM performs the worst on phase error correction based on our
+example data.
 
 Side notes:
 
-a) With a single CPU, it takes about 10 minutes to process all R code
+1.  With a single CPU, it takes about 10 minutes to process all R code
 
-b) Instruction files with higher resolution plots can be found within folder "docs", there are in three formats: pdf, word, and html
+2.  Instruction files are also available within folder “docs”, there are
+    in three formats: pdf, word, and html
 
 ## IV. NMRphasing R package general information
 
