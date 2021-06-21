@@ -103,7 +103,7 @@ ordinary area.
 
 ### 3. MPC\_EMP
 
-This is to use our new multiple linear model approach based on entropy
+This is our new multiple linear model approach based on entropy
 minimization with negative peak penalty
 
     mempp = NMRphasing(specDatIn = fdat$frequency_domain, method = "MPC_EMP") 
@@ -111,7 +111,6 @@ minimization with negative peak penalty
 
     ### plot to compare before and after phase error correction
 
-    pdat = nlsdat
     pdat$Phased_Absoprtion = mempp
 
     p1 = ggplot(pdat, aes(x = ppm, y = Observed_Absorption)) +
@@ -128,11 +127,95 @@ minimization with negative peak penalty
 
 ### 4. SPC\_DAOM
 
-### 5. SPC\_EMP
+This phase error correction method is based on the traditional single
+model approach but with our new optimization function to minimize
+difference between absolute area and ordinal area.
+
+    daomp = NMRphasing(specDatIn = fdat$frequency_domain, method = "SPC_DAOM") 
+    ## this step might take a couple of minutes
+
+    ### plot to compare before and after phase error correction
+
+    pdat$Phased_Absoprtion = daomp
+
+    p1 = ggplot(pdat, aes(x = ppm, y = Observed_Absorption)) +
+          geom_line() + theme_bw() + labs(y = "Observed Absorption") +
+          theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+            panel.background = element_blank(), axis.line = element_line(colour = "black"))
+    p2 = ggplot(pdat, aes(x = ppm, y = Phased_Absoprtion)) +
+          geom_line() + theme_bw() + labs(y = "Phased Absoprtion") +
+            theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+            panel.background = element_blank(), axis.line = element_line(colour = "black"))
+    ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),nrow = 2, ncol=1)
+
+![](README_files/figure-markdown_strict/unnamed-chunk-7-1.png) \#\#\# 5.
+SPC\_EMP This is an old phase error method based on the traditional
+single model approach targeting on entropy minimization with negative
+peak penalty
+
+    empp = NMRphasing(specDatIn = fdat$frequency_domain, method = "SPC_EMP") 
+    ## this step might take a couple of minutes
+
+    ### plot to compare before and after phase error correction
+
+    pdat$Phased_Absoprtion = empp
+
+    p1 = ggplot(pdat, aes(x = ppm, y = Observed_Absorption)) +
+          geom_line() + theme_bw() + labs(y = "Observed Absorption") +
+          theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+            panel.background = element_blank(), axis.line = element_line(colour = "black"))
+    p2 = ggplot(pdat, aes(x = ppm, y = Phased_Absoprtion)) +
+          geom_line() + theme_bw() + labs(y = "Phased Absoprtion") +
+            theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+            panel.background = element_blank(), axis.line = element_line(colour = "black"))
+    ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),nrow = 2, ncol=1)
+
+![](README_files/figure-markdown_strict/unnamed-chunk-8-1.png)
 
 ### 6. SPC\_AAM
 
-### 7. SPC\_DSM
+This is an old phase error method based on the traditional single model
+approach with minimization on absolute area
+
+    aamp = NMRphasing(specDatIn = fdat$frequency_domain, method = "SPC_AAM") 
+    ## this step might take a couple of minutes
+
+    ### plot to compare before and after phase error correction
+
+    pdat$Phased_Absoprtion = aamp
+
+    p1 = ggplot(pdat, aes(x = ppm, y = Observed_Absorption)) +
+          geom_line() + theme_bw() + labs(y = "Observed Absorption") +
+          theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+            panel.background = element_blank(), axis.line = element_line(colour = "black"))
+    p2 = ggplot(pdat, aes(x = ppm, y = Phased_Absoprtion)) +
+          geom_line() + theme_bw() + labs(y = "Phased Absoprtion") +
+            theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+            panel.background = element_blank(), axis.line = element_line(colour = "black"))
+    ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),nrow = 2, ncol=1)
+
+![](README_files/figure-markdown_strict/unnamed-chunk-9-1.png) \#\#\# 7.
+SPC\_DSM This is an old phase error method based on the traditional
+single model approach with dispersion summation minimization.
+
+    dsmp = NMRphasing(specDatIn = fdat$frequency_domain, method = "SPC_DSM") 
+    ## this step might take a couple of minutes
+
+    ### plot to compare before and after phase error correction
+
+    pdat$Phased_Absoprtion = dsmp
+
+    p1 = ggplot(pdat, aes(x = ppm, y = Observed_Absorption)) +
+          geom_line() + theme_bw() + labs(y = "Observed Absorption") +
+          theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+            panel.background = element_blank(), axis.line = element_line(colour = "black"))
+    p2 = ggplot(pdat, aes(x = ppm, y = Phased_Absoprtion)) +
+          geom_line() + theme_bw() + labs(y = "Phased Absoprtion") +
+            theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+            panel.background = element_blank(), axis.line = element_line(colour = "black"))
+    ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),nrow = 2, ncol=1)
+
+![](README_files/figure-markdown_strict/unnamed-chunk-10-1.png)
 
 ## IV. NMRphasing R package general information
 
