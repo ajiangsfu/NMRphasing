@@ -148,10 +148,12 @@ difference between absolute area and ordinal area.
             panel.background = element_blank(), axis.line = element_line(colour = "black"))
     ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),nrow = 2, ncol=1)
 
-![](README_files/figure-markdown_strict/unnamed-chunk-7-1.png) \#\#\# 5.
-SPC\_EMP This is an old phase error method based on the traditional
-single model approach targeting on entropy minimization with negative
-peak penalty
+![](README_files/figure-markdown_strict/unnamed-chunk-7-1.png)
+
+### 5. SPC\_EMP
+
+This is an old phase error method based on the traditional single model
+approach targeting on entropy minimization with negative peak penalty
 
     empp = NMRphasing(specDatIn = fdat$frequency_domain, method = "SPC_EMP") 
     ## this step might take a couple of minutes
@@ -194,9 +196,12 @@ approach with minimization on absolute area
             panel.background = element_blank(), axis.line = element_line(colour = "black"))
     ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),nrow = 2, ncol=1)
 
-![](README_files/figure-markdown_strict/unnamed-chunk-9-1.png) \#\#\# 7.
-SPC\_DSM This is an old phase error method based on the traditional
-single model approach with dispersion summation minimization.
+![](README_files/figure-markdown_strict/unnamed-chunk-9-1.png)
+
+### 7. SPC\_DSM
+
+This is an old phase error method based on the traditional single model
+approach with dispersion summation minimization.
 
     dsmp = NMRphasing(specDatIn = fdat$frequency_domain, method = "SPC_DSM") 
     ## this step might take a couple of minutes
