@@ -1,7 +1,8 @@
 #' MPC_DSM
 #' @description Multiple single linear models that minimize the total dispersion.
-#' @details This function is used to process phase error correction through multiple single linear models that minimize the total dispersion, followed by Polynomial baseline correction when necessary.
+#' @details This function is used to process phase error correction through multiple single linear models that minimize the total dispersion, followed by polynomial baseline correction when necessary.
 #' @param specdat A complex number vector of observed frequency domain data.
+#' @param withBC A logical parameter that enables/disables baseline correction after baseline correction
 #' @return A numeric vector of phase corrected absorption spectrum
 #' @concept phase correction
 #' @author Aixiang Jiang
@@ -23,7 +24,7 @@
 #' @export
 
 
-MPC_DSM = function(specdat){
+MPC_DSM = function(specdat, withBC = TRUE){
 
   cplxDat=specdat
   pp=(Re(cplxDat))**2+(Im(cplxDat))**2
@@ -56,8 +57,13 @@ MPC_DSM = function(specdat){
   })
 
   phasedAll=unlist(phasedComb)
-  tryBL=myBaseline(phasedAll,bsDf=5, BL_method="modpolyfit")
-  return(as.numeric(tryBL))
+
+  if(withBC == TRUE){
+    tryBL=myBaseline(phasedAll,bsDf=5, BL_method="modpolyfit")
+    phasedAll = as.numeric(tryBL)
+  }
+
+  return(phasedAll)
 
 }
 

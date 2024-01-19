@@ -1,7 +1,8 @@
 #' MPC_EMP
 #' @description Multiple single linear models based on entropy minimization with negative peak penalty.
-#' @details This function is used to process phase error correction through multiple single linear models with entropy minimization with negative peak penalty, followed by Polynomial baseline correction when necessary.
+#' @details This function is used to process phase error correction through multiple single linear models with entropy minimization with negative peak penalty, followed by polynomial baseline correction when necessary.
 #' @param specdat A complex number vector of observed frequency domain data.
+#' @param withBC A logical parameter that enables/disables baseline correction after baseline correction
 #' @return A numeric vector of phase corrected absorption spectrum
 #' @concept phase correction
 #' @author Aixiang Jiang
@@ -19,7 +20,7 @@
 #' @export
 
 
-MPC_EMP = function(specdat){
+MPC_EMP = function(specdat, withBC = TRUE){
 
   cplxDat=specdat
   pp=(Re(cplxDat))**2+(Im(cplxDat))**2
@@ -52,8 +53,13 @@ MPC_EMP = function(specdat){
   })
 
   phasedAll=unlist(phasedComb)
-  tryBL=myBaseline(phasedAll,bsDf=5, BL_method="modpolyfit")
-  return(as.numeric(tryBL))
+
+  if(withBC == TRUE){
+    tryBL=myBaseline(phasedAll,bsDf=5, BL_method="modpolyfit")
+    phasedAll = as.numeric(tryBL)
+  }
+
+  return(phasedAll)
 
 }
 

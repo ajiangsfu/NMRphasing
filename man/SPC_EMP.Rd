@@ -4,10 +4,12 @@
 \alias{SPC_EMP}
 \title{SPC_EMP}
 \usage{
-SPC_EMP(specdat)
+SPC_EMP(specdat, withBC = TRUE)
 }
 \arguments{
 \item{specdat}{A complex number vector of observed frequency domain data}
+
+\item{withBC}{A logical parameter that enables/disables baseline correction after baseline correction}
 }
 \value{
 A numeric vector of phase corrected absorption spectrum
@@ -17,7 +19,7 @@ A single linear model with entropy minimization with negative peak penalty
 }
 \details{
 This function is to process phase error correction through a single linear model with entropy minimization with negative peak penalty,
-followed by Polynomial baseline correction
+followed by polynomial baseline correction if necessary
 }
 \examples{
 data("fdat")

@@ -8,7 +8,7 @@ myBaseline = function(specDat, bsDf=5, BL_method="modpolyfit", RsquareCut=0.2){
   #####    otherwise skip it, and just return the input data
   #### specDat is a vector of freq domain data, should be phased before using this function
   #### bsDf is the degree of freedom for B-spline, my default is set as 5
-  #### BL_method: method for baseline correction of function "baseline", here I set defualt as "modpolyfit"
+  #### BL_method: method for baseline correction of function "baseline", here I set default as "modpolyfit"
 
   lowTmp=stats::lowess(specDat)
 

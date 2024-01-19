@@ -4,10 +4,12 @@
 \alias{NLS}
 \title{NLS}
 \usage{
-NLS(specdat)
+NLS(specdat, withBC = TRUE)
 }
 \arguments{
 \item{specdat}{A complex number vector of observed frequency domain data.}
+
+\item{withBC}{A logical parameter that enables/disables baseline correction after baseline correction}
 }
 \value{
 A numeric vector of phase corrected absorption spectrum

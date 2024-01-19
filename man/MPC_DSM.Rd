@@ -4,10 +4,12 @@
 \alias{MPC_DSM}
 \title{MPC_DSM}
 \usage{
-MPC_DSM(specdat)
+MPC_DSM(specdat, withBC = TRUE)
 }
 \arguments{
 \item{specdat}{A complex number vector of observed frequency domain data.}
+
+\item{withBC}{A logical parameter that enables/disables baseline correction after baseline correction}
 }
 \value{
 A numeric vector of phase corrected absorption spectrum
@@ -16,7 +18,7 @@ A numeric vector of phase corrected absorption spectrum
 Multiple single linear models that minimize the total dispersion.
 }
 \details{
-This function is used to process phase error correction through multiple single linear models that minimize the total dispersion, followed by Polynomial baseline correction when necessary.
+This function is used to process phase error correction through multiple single linear models that minimize the total dispersion, followed by polynomial baseline correction when necessary.
 }
 \examples{
 data("fdat")

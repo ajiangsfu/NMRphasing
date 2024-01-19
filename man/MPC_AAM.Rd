@@ -4,10 +4,12 @@
 \alias{MPC_AAM}
 \title{MPC_AAM}
 \usage{
-MPC_AAM(specdat)
+MPC_AAM(specdat, withBC = TRUE)
 }
 \arguments{
 \item{specdat}{A complex number vector of observed frequency domain data.}
+
+\item{withBC}{A logical parameter that enables/disables baseline correction after baseline correction}
 }
 \value{
 A numeric vector of phase corrected absorption spectrum
@@ -16,7 +18,7 @@ A numeric vector of phase corrected absorption spectrum
 Multiple single linear models that minimize absolute area.
 }
 \details{
-This function is used to process phase error correction through multiple single linear models that minimize absolute area, followed by Polynomial baseline correction when necessary.
+This function is used to process phase error correction through multiple single linear models that minimize absolute area, followed by polynomial baseline correction when necessary.
 }
 \examples{
 data("fdat")

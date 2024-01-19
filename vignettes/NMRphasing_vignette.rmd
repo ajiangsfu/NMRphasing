@@ -91,6 +91,12 @@ ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),font.label = list(
 
 ```
 
+The default setting for 'withBC' is TRUE, which tests for baseline bias based on spline regression on the lowess line. If the maximum of adjusted squared r is greater than 0.2, baseline correction is performed with modified polynomial fitting.
+
+If you set 'withBC' as FALSE, then no baseline bias will be tested and corrected. The example code is:
+```{r eval=FALSE}
+fdat$Phased_Absoprtion = NMRphasing(specDatIn = fdat$frequency_domain, method = "NLS", withBC = FALSE) 
+```
 
 ### 2. SPC_DANM
 The "SPC_DANM" method employs the traditional single linear model approach for phase error correction but incorporates a new optimization function designed to minimize the difference between absolute area and net area.

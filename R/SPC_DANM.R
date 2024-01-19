@@ -1,9 +1,10 @@
 
 #' SPC_DANM
 #' @description A single linear model with Minimization of difference between absolute area and net area
-#' @details This function is to process phase error correction through a single linear model with Minimization of difference between absolute area and net area,
-#' followed by Polynomial baseline correction.
+#' @details This function is to process phase error correction through a single linear model with minimization of difference between absolute area and net area,
+#' followed by polynomial baseline correction if necessary
 #' @param specdat A complex number vector of observed frequency domain data
+#' @param withBC A logical parameter that enables/disables baseline correction after baseline correction
 #' @return A numeric vector of phase corrected absorption spectrum
 #' @concept phase correction
 #' @author Aixiang Jiang
@@ -21,7 +22,7 @@
 #' @export
 
 
-SPC_DANM =function (specdat){
+SPC_DANM =function (specdat, withBC = TRUE){
 
   hdat=cbind(Re(specdat), Im(specdat))
 
@@ -40,12 +41,14 @@ SPC_DANM =function (specdat){
   dat3col=cbind(hdat, angles)
   phasedDat=t(apply(dat3col, 1, phaseCorr2))
 
-  # tryBL=myBaseline(phasedDat[,1],bsDf=5, BL_method="modpolyfit")
-  # return(tryBL)
+  phasedAll = phasedDat[,1]
 
-  ##### return phased plus baseline corrected spectrum
-  tryBL=baseline(t(phasedDat[,1]),method="modpolyfit")
-  return(baseline::getCorrected(tryBL)[1,])
+  if(withBC == TRUE){
+    tryBL=myBaseline(phasedAll,bsDf=5, BL_method="modpolyfit")
+    phasedAll = as.numeric(tryBL)
+  }
+
+  return(phasedAll)
 
 }
 

@@ -8,7 +8,8 @@ NMRphasing(
   specDatIn,
   absorptionOnly = FALSE,
   method = c("NLS", "MPC_DANM", "MPC_EMP", "MPC_AAM", "MPC_DSM", "SPC_DANM", "SPC_EMP",
-    "SPC_AAM", "SPC_DSM")
+    "SPC_AAM", "SPC_DSM"),
+  withBC = TRUE
 )
 }
 \arguments{
@@ -20,6 +21,8 @@ which 1st column is for absorption spectrum, and 2nd column is for dispersion sp
 
 \item{method}{One of phase correction and baseline correction methods. There are nine available choices, which are "NLS", "MPC_DAOM", "MPC_EMP", "MPC_AAM", "MPC_DSM", "SPC_DAOM", "SPC_EMP", "SPC_AAM", "SPC_DSM",
 with "NLS", non-linear shrinkage as default.}
+
+\item{withBC}{A logical parameter that enables/disables baseline correction after baseline correction}
 }
 \value{
 A numeric vector of phase corrected absorption spectrum

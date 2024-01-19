@@ -7,6 +7,7 @@
 #' @param absorptionOnly A logical variable to tell us if specDatIn is a a vector of absorption specrtrum, default is false
 #' @param method One of phase correction and baseline correction methods. There are nine available choices, which are "NLS", "MPC_DAOM", "MPC_EMP", "MPC_AAM", "MPC_DSM", "SPC_DAOM", "SPC_EMP", "SPC_AAM", "SPC_DSM",
 #'               with "NLS", non-linear shrinkage as default.
+#' @param withBC A logical parameter that enables/disables baseline correction after baseline correction
 #' @return A numeric vector of phase corrected absorption spectrum
 #' @concept phase error correction
 #' @author Aixiang Jiang
@@ -34,7 +35,8 @@
 
 
 NMRphasing = function (specDatIn, absorptionOnly = FALSE,
-                       method = c("NLS", "MPC_DANM", "MPC_EMP","MPC_AAM", "MPC_DSM","SPC_DANM", "SPC_EMP", "SPC_AAM", "SPC_DSM")){
+                       method = c("NLS", "MPC_DANM", "MPC_EMP","MPC_AAM", "MPC_DSM","SPC_DANM", "SPC_EMP", "SPC_AAM", "SPC_DSM"),
+                       withBC = TRUE){
   datin = NA
   if(absorptionOnly){
     datin = HilbertWithFT(specDatIn)
@@ -47,23 +49,23 @@ NMRphasing = function (specDatIn, absorptionOnly = FALSE,
   outdat = NA
 
   if(method == "MPC_DANM"){
-     outdat = MPC_DANM(specdat = datin)
+     outdat = MPC_DANM(specdat = datin, withBC = withBC)
   }else if(method == "MPC_EMP"){
-     outdat = MPC_EMP(specdat = datin)
+     outdat = MPC_EMP(specdat = datin, withBC = withBC)
   }else if(method == "MPC_AAM"){
-    outdat = MPC_AAM(specdat = datin)
+    outdat = MPC_AAM(specdat = datin, withBC = withBC)
   }else if(method == "MPC_DSM"){
-    outdat = MPC_DSM(specdat = datin)
+    outdat = MPC_DSM(specdat = datin, withBC = withBC)
   }else if(method == "SPC_DANM"){
-     outdat = SPC_DANM(specdat = datin)
+     outdat = SPC_DANM(specdat = datin, withBC = withBC)
   }else if(method == "SPC_EMP"){
-     outdat = SPC_EMP(specdat = datin)
+     outdat = SPC_EMP(specdat = datin, withBC = withBC)
   }else if(method == "SPC_AAM"){
-     outdat = SPC_AAM(specdat = datin)
+     outdat = SPC_AAM(specdat = datin, withBC = withBC)
   }else if(method == "SPC_DSM"){
-     outdat = SPC_DSM(specdat = datin)
+     outdat = SPC_DSM(specdat = datin, withBC = withBC)
   }else{  ## default is NLS
-     outdat = NLS(specdat = datin)
+     outdat = NLS(specdat = datin, withBC = withBC)
   }
 
   return(outdat)

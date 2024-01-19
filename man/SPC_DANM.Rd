@@ -4,10 +4,12 @@
 \alias{SPC_DANM}
 \title{SPC_DANM}
 \usage{
-SPC_DANM(specdat)
+SPC_DANM(specdat, withBC = TRUE)
 }
 \arguments{
 \item{specdat}{A complex number vector of observed frequency domain data}
+
+\item{withBC}{A logical parameter that enables/disables baseline correction after baseline correction}
 }
 \value{
 A numeric vector of phase corrected absorption spectrum
@@ -16,8 +18,8 @@ A numeric vector of phase corrected absorption spectrum
 A single linear model with Minimization of difference between absolute area and net area
 }
 \details{
-This function is to process phase error correction through a single linear model with Minimization of difference between absolute area and net area,
-followed by Polynomial baseline correction.
+This function is to process phase error correction through a single linear model with minimization of difference between absolute area and net area,
+followed by polynomial baseline correction if necessary
 }
 \examples{
 data("fdat")

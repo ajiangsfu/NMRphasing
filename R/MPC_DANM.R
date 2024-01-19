@@ -1,7 +1,8 @@
 #' MPC_DANM
 #' @description Multiple linear models that minimize the difference between absolute area and net area.
-#' @details This function processes phase error correction through multiple linear models that minimize the difference between absolute area and net area, followed by Polynomial baseline correction when necessary.
-#' @param specdat A complex number vector of observed frequency domain data.
+#' @details This function processes phase error correction through multiple linear models that minimize the difference between absolute area and net area, followed by polynomial baseline correction when necessary.
+#' @param specdat A complex number vector of observed frequency domain data
+#' @param withBC A logical parameter that enables/disables baseline correction after baseline correction.
 #' @return A numeric vector of phase corrected absorption spectrum
 #' @concept phase correction
 #' @author Aixiang Jiang
@@ -16,7 +17,7 @@
 #' @export
 
 
-MPC_DANM=function(specdat){
+MPC_DANM=function(specdat, withBC = TRUE){
 
   cplxDat=specdat
   pp=(Re(cplxDat))**2+(Im(cplxDat))**2
@@ -49,8 +50,13 @@ MPC_DANM=function(specdat){
   })
 
   phasedAll=unlist(phasedComb)
-  tryBL=myBaseline(phasedAll,bsDf=5, BL_method="modpolyfit")
-  return(as.numeric(tryBL))
+
+  if(withBC == TRUE){
+    tryBL=myBaseline(phasedAll,bsDf=5, BL_method="modpolyfit")
+    phasedAll = as.numeric(tryBL)
+  }
+
+  return(phasedAll)
 
 }
 

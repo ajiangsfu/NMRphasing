@@ -4,10 +4,12 @@
 \alias{SPC_DSM}
 \title{SPC_DSM}
 \usage{
-SPC_DSM(specdat)
+SPC_DSM(specdat, withBC = TRUE)
 }
 \arguments{
 \item{specdat}{A complex number vector of observed frequency domain data}
+
+\item{withBC}{A logical parameter that enables/disables baseline correction after baseline correction}
 }
 \value{
 A numeric vector of phase corrected absorption spectrum
@@ -17,7 +19,7 @@ A single linear model with dispersion summation minimization.
 }
 \details{
 This function is to process phase error correction through a single linear model with dispersion summation minimization,
-followed by Polynomial baseline correction.
+followed by polynomial baseline correction if necessary
 }
 \examples{
 data("fdat")

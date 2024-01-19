@@ -2,6 +2,7 @@
 #' @description Non-linear shrinkage
 #' @details This function is used to process phase error correction through non-linear shrinkage, followed by Polynomial baseline correction when necessary.
 #' @param specdat A complex number vector of observed frequency domain data.
+#' @param withBC A logical parameter that enables/disables baseline correction after baseline correction
 #' @return A numeric vector of phase corrected absorption spectrum
 #' @concept phase correction
 #' @author Aixiang Jiang
@@ -15,7 +16,7 @@
 #' @export
 
 
-NLS = function(specdat){
+NLS = function(specdat, withBC = TRUE){
 
   cplxDat=specdat
   pp=(Re(cplxDat))**2+(Im(cplxDat))**2
@@ -51,8 +52,13 @@ NLS = function(specdat){
   })
 
   phasedAll=unlist(phasedComb)
-  tryBL=myBaseline(phasedAll,bsDf=5, BL_method="modpolyfit")
-  return(as.numeric(tryBL))
+
+  if(withBC == TRUE){
+    tryBL=myBaseline(phasedAll,bsDf=5, BL_method="modpolyfit")
+    phasedAll = as.numeric(tryBL)
+  }
+
+  return(phasedAll)
 
 }
 
