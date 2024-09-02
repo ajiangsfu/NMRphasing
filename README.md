@@ -60,6 +60,8 @@ If your NMR data uses ppm values, you can substitute ‘ppm’ accordingly.
 
     ## Loading required package: ggplot2
 
+    ## Warning: package 'ggplot2' was built under R version 4.3.3
+
     p1 = ggplot(fdat, aes(x = ppm, y = Observed_Absorption)) +
           geom_line() + theme_bw() + labs(y = "Observed Absorption") +
           theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
@@ -219,8 +221,8 @@ minimization.
 ### 8. SPC\_DSM
 
 This is an old phase error correction method based on the traditional
-single model approach with an existing optimization function: dispersion
-summation minimization.
+single model approach with an existing optimization function: absolute
+summation minimization on dispersion.
 
     fdat$Phased_Absoprtion = NMRphasing(specDatIn = fdat$frequency_domain, method = "SPC_DSM") 
 
@@ -237,8 +239,8 @@ summation minimization.
 ### 9. MPC\_DSM
 
 This is to apply our new multiple linear model approach for phase error
-correction based on an existing optimization function:dispersion
-summation minimization..
+correction based on an existing optimization function: absolute
+summation minimization on dispersion.
 
     fdat$Phased_Absoprtion = NMRphasing(specDatIn = fdat$frequency_domain, method = "MPC_DSM") 
 
@@ -266,7 +268,7 @@ summation minimization..
     ##  collate  English_United States.utf8
     ##  ctype    English_United States.utf8
     ##  tz       America/Vancouver
-    ##  date     2024-01-19
+    ##  date     2024-09-01
     ##  pandoc   3.1.8 @ C:/PROGRA~1/Pandoc/ (via rmarkdown)
     ## 
     ## ─ Packages ───────────────────────────────────────────────────────────────────
@@ -280,9 +282,9 @@ summation minimization..
     ##  carData           3.0-5   2022-01-06 [1] CRAN (R 4.3.1)
     ##  cli               3.6.2   2023-12-11 [1] CRAN (R 4.3.2)
     ##  colorspace        2.1-0   2023-01-23 [1] CRAN (R 4.3.1)
-    ##  cowplot           1.1.2   2023-12-15 [1] CRAN (R 4.3.2)
+    ##  cowplot           1.1.3   2024-01-22 [1] CRAN (R 4.3.3)
     ##  devtools          2.4.5   2022-10-11 [1] CRAN (R 4.3.2)
-    ##  digest            0.6.33  2023-07-07 [1] CRAN (R 4.3.1)
+    ##  digest            0.6.35  2024-03-11 [1] CRAN (R 4.3.3)
     ##  dplyr             1.1.4   2023-11-17 [1] CRAN (R 4.3.2)
     ##  ellipsis          0.3.2   2021-04-29 [1] CRAN (R 4.3.1)
     ##  evaluate          0.23    2023-11-01 [1] CRAN (R 4.3.2)
@@ -291,20 +293,20 @@ summation minimization..
     ##  fastmap           1.1.1   2023-02-24 [1] CRAN (R 4.3.1)
     ##  fs                1.6.3   2023-07-20 [1] CRAN (R 4.3.1)
     ##  generics          0.1.3   2022-07-05 [1] CRAN (R 4.3.1)
-    ##  ggplot2         * 3.4.4   2023-10-12 [1] CRAN (R 4.3.1)
+    ##  ggplot2         * 3.5.1   2024-04-23 [1] CRAN (R 4.3.3)
     ##  ggpubr          * 0.6.0   2023-02-10 [1] CRAN (R 4.3.1)
     ##  ggsignif          0.6.4   2022-10-13 [1] CRAN (R 4.3.1)
-    ##  glue              1.6.2   2022-02-24 [1] CRAN (R 4.3.1)
+    ##  glue              1.7.0   2024-01-09 [1] CRAN (R 4.3.2)
     ##  gtable            0.3.4   2023-08-21 [1] CRAN (R 4.3.1)
     ##  highr             0.10    2022-12-22 [1] CRAN (R 4.3.1)
-    ##  htmltools         0.5.7   2023-11-03 [1] CRAN (R 4.3.2)
-    ##  htmlwidgets       1.6.4   2023-12-06 [1] CRAN (R 4.3.2)
-    ##  httpuv            1.6.13  2023-12-06 [1] CRAN (R 4.3.2)
+    ##  htmltools         0.5.8   2024-03-25 [1] CRAN (R 4.3.3)
+    ##  htmlwidgets       1.6.4   2023-12-06 [1] CRAN (R 4.3.3)
+    ##  httpuv            1.6.15  2024-03-26 [1] CRAN (R 4.3.2)
     ##  knitr             1.45    2023-10-30 [1] CRAN (R 4.3.1)
     ##  labeling          0.4.3   2023-08-29 [1] CRAN (R 4.3.1)
     ##  later             1.3.2   2023-12-06 [1] CRAN (R 4.3.2)
     ##  lifecycle         1.0.4   2023-11-07 [1] CRAN (R 4.3.2)
-    ##  limSolve          1.5.7   2023-09-21 [1] CRAN (R 4.3.1)
+    ##  limSolve          1.5.7.1 2024-02-05 [1] CRAN (R 4.3.3)
     ##  lpSolve           5.6.20  2023-12-10 [1] CRAN (R 4.3.2)
     ##  magrittr          2.0.3   2022-03-30 [1] CRAN (R 4.3.1)
     ##  MASS              7.3-60  2023-05-04 [2] CRAN (R 4.3.2)
@@ -315,35 +317,35 @@ summation minimization..
     ##  munsell           0.5.0   2018-06-12 [1] CRAN (R 4.3.1)
     ##  NMRphasing      * 1.0.4   2024-01-19 [1] local
     ##  pillar            1.9.0   2023-03-22 [1] CRAN (R 4.3.1)
-    ##  pkgbuild          1.4.3   2023-12-10 [1] CRAN (R 4.3.2)
+    ##  pkgbuild          1.4.4   2024-03-17 [1] CRAN (R 4.3.3)
     ##  pkgconfig         2.0.3   2019-09-22 [1] CRAN (R 4.3.1)
-    ##  pkgload           1.3.3   2023-09-22 [1] CRAN (R 4.3.1)
+    ##  pkgload           1.3.4   2024-01-16 [1] CRAN (R 4.3.2)
     ##  profvis           0.3.8   2023-05-02 [1] CRAN (R 4.3.2)
     ##  promises          1.2.1   2023-08-10 [1] CRAN (R 4.3.2)
     ##  purrr             1.0.2   2023-08-10 [1] CRAN (R 4.3.1)
     ##  quadprog          1.5-8   2019-11-20 [1] CRAN (R 4.3.1)
     ##  R6                2.5.1   2021-08-19 [1] CRAN (R 4.3.1)
-    ##  Rcpp              1.0.11  2023-07-06 [1] CRAN (R 4.3.1)
-    ##  remotes           2.4.2.1 2023-07-18 [1] CRAN (R 4.3.2)
-    ##  rlang             1.1.2   2023-11-04 [1] CRAN (R 4.3.2)
-    ##  rmarkdown         2.25    2023-09-18 [1] CRAN (R 4.3.1)
+    ##  Rcpp              1.0.12  2024-01-09 [1] CRAN (R 4.3.2)
+    ##  remotes           2.5.0   2024-03-17 [1] CRAN (R 4.3.3)
+    ##  rlang             1.1.3   2024-01-10 [1] CRAN (R 4.3.2)
+    ##  rmarkdown         2.26    2024-03-05 [1] CRAN (R 4.3.3)
     ##  rstatix           0.7.2   2023-02-01 [1] CRAN (R 4.3.1)
-    ##  rstudioapi        0.15.0  2023-07-07 [1] CRAN (R 4.3.1)
+    ##  rstudioapi        0.16.0  2024-03-24 [1] CRAN (R 4.3.3)
     ##  scales            1.3.0   2023-11-28 [1] CRAN (R 4.3.2)
     ##  sessioninfo       1.2.2   2021-12-06 [1] CRAN (R 4.3.2)
-    ##  shiny             1.8.0   2023-11-17 [1] CRAN (R 4.3.2)
+    ##  shiny             1.8.1   2024-03-26 [1] CRAN (R 4.3.2)
     ##  SparseM           1.81    2021-02-18 [1] CRAN (R 4.3.1)
     ##  stringi           1.8.3   2023-12-11 [1] CRAN (R 4.3.2)
     ##  stringr           1.5.1   2023-11-14 [1] CRAN (R 4.3.2)
     ##  tibble            3.2.1   2023-03-20 [1] CRAN (R 4.3.1)
-    ##  tidyr             1.3.0   2023-01-24 [1] CRAN (R 4.3.1)
-    ##  tidyselect        1.2.0   2022-10-10 [1] CRAN (R 4.3.1)
+    ##  tidyr             1.3.1   2024-01-24 [1] CRAN (R 4.3.2)
+    ##  tidyselect        1.2.1   2024-03-11 [1] CRAN (R 4.3.3)
     ##  urlchecker        1.0.1   2021-11-30 [1] CRAN (R 4.3.2)
-    ##  usethis           2.2.2   2023-07-06 [1] CRAN (R 4.3.2)
+    ##  usethis           2.2.3   2024-02-19 [1] CRAN (R 4.3.3)
     ##  utf8              1.2.4   2023-10-22 [1] CRAN (R 4.3.1)
     ##  vctrs             0.6.5   2023-12-01 [1] CRAN (R 4.3.2)
-    ##  withr             2.5.2   2023-10-30 [1] CRAN (R 4.3.1)
-    ##  xfun              0.41    2023-11-01 [1] CRAN (R 4.3.2)
+    ##  withr             3.0.0   2024-01-16 [1] CRAN (R 4.3.2)
+    ##  xfun              0.43    2024-03-25 [1] CRAN (R 4.3.3)
     ##  xtable            1.8-4   2019-04-21 [1] CRAN (R 4.3.1)
     ##  yaml              2.3.8   2023-12-11 [1] CRAN (R 4.3.2)
     ## 

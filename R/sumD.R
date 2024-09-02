@@ -8,5 +8,5 @@ sumD = function(phasePara, specDat) {
 
   dat3col=cbind(specDat, phases)
   phasedDat=t(apply(dat3col, 1, phaseCorr2)) ### output is a two column matrix: the phased real and the phased imaginary of freq data
-  return(sum(phasedDat[,2]))
+  return(abs(sum(phasedDat[,2]))) # actually absolute of integral
 }
