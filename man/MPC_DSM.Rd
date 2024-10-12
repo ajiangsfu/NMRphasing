@@ -25,11 +25,7 @@ data("fdat")
 mpc_dsm_phased1 <- MPC_DSM(fdat$frequency_domain)
 }
 \references{
-Chen, L., Weng, Z., Goh, L., & Garland, M. (2002). An efficient algorithm for automatic phase correction of NMR spectra based on
-entropy minimization. Journal of Magnetic Resonance, 158, 1-2.
-
-Ernst, R. R. (1969). Numerical Hilbert transform and automatic phase correction in magnetic resonance spectroscopy.
-Journal of Magnetic Resonance, 1, 7-26
+Binczyk, F., Tarnawski, R., & Polanska, J. (2015). Strategies for optimizing the phase correction algorithms in Nuclear Magnetic Resonance spectroscopy. Biomedical Engineering Online, 14 Suppl 2(Suppl 2), S5. https://doi.org/10.1186/1475-925X-14-S2-S5
 
 Liland KH, Almøy T, Mevik B (2010), Optimal Choice of Baseline
 Correction for Multivariate Calibration of Spectra, Applied Spectroscopy 64, pp. 1007-1016.

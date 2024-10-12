@@ -203,7 +203,7 @@ ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),font.label = list(
 
 ### 8. SPC_DSM
 
-This is an old phase error correction method based on the traditional single model approach with an existing optimization function: absolute summation minimization on dispersion.
+This is an old phase error correction method based on the traditional single model approach with an existing optimization function: summation minimization on dispersion.
 
 ```{r dpi = 200}
 fdat$Phased_Absoprtion = NMRphasing(specDatIn = fdat$frequency_domain, method = "SPC_DSM") 
@@ -220,7 +220,7 @@ ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),font.label = list(
 
 ### 9. MPC_DSM
 
-This is to apply our new multiple linear model approach for phase error correction based on an existing optimization function: absolute summation minimization on dispersion.
+This is to apply our new multiple linear model approach for phase error correction based on an existing optimization function: summation minimization on dispersion.
 
 ```{r dpi = 200}
 fdat$Phased_Absoprtion = NMRphasing(specDatIn = fdat$frequency_domain, method = "MPC_DSM") 
@@ -234,6 +234,42 @@ p2 = ggplot(fdat, aes(x = ppm, y = Phased_Absoprtion)) +
 ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),font.label = list(size = 6),nrow = 2, ncol=1)
 
 ```
+
+### 10 SPC_ADSM
+
+This is a phase error correction method based on the traditional single model approach with an optimization function: absolute summation minimization on dispersion.
+
+```{r dpi = 200}
+fdat$Phased_Absoprtion = NMRphasing(specDatIn = fdat$frequency_domain, method = "SPC_ADSM") 
+
+p2 = ggplot(fdat, aes(x = ppm, y = Phased_Absoprtion)) +
+      geom_line() + theme_bw() + labs(y = "Phased Absoprtion") +
+        theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"),
+        axis.title.x = element_text(size = 6), 
+        axis.title.y = element_text(size = 6))
+ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),font.label = list(size = 6),nrow = 2, ncol=1)
+
+```
+
+### 11. MPC_ADSM
+
+This is to apply our new multiple linear model approach for phase error correction based on an optimization function: absolute summation minimization on dispersion.
+
+```{r dpi = 200}
+fdat$Phased_Absoprtion = NMRphasing(specDatIn = fdat$frequency_domain, method = "MPC_ADSM") 
+
+p2 = ggplot(fdat, aes(x = ppm, y = Phased_Absoprtion)) +
+      geom_line() + theme_bw() + labs(y = "Phased Absoprtion") +
+        theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"),
+        axis.title.x = element_text(size = 6), 
+        axis.title.y = element_text(size = 6))
+ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),font.label = list(size = 6),nrow = 2, ncol=1)
+
+```
+
+
 
 ## IV. NMRphasing R package general information
 

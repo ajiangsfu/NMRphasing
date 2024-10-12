@@ -1,6 +1,6 @@
-#' MPC_DSM
-#' @description Multiple single linear models that minimize the total dispersion.
-#' @details This function is used to process phase error correction through multiple single linear models that minimize the total dispersion, followed by polynomial baseline correction when necessary.
+#' MPC_ADSM
+#' @description Multiple single linear models that minimize the absolute total dispersion.
+#' @details This function is used to process phase error correction through multiple single linear models that minimize the absolute total dispersion, followed by polynomial baseline correction when necessary.
 #' @param specdat A complex number vector of observed frequency domain data.
 #' @param withBC A logical parameter that enables/disables baseline correction after baseline correction
 #' @return A numeric vector of phase corrected absorption spectrum
@@ -8,7 +8,13 @@
 #' @author Aixiang Jiang
 #' @references
 #'
-#' Binczyk, F., Tarnawski, R., & Polanska, J. (2015). Strategies for optimizing the phase correction algorithms in Nuclear Magnetic Resonance spectroscopy. Biomedical Engineering Online, 14 Suppl 2(Suppl 2), S5. https://doi.org/10.1186/1475-925X-14-S2-S5
+#' Jiang, A. (2024). Phase Error Correction in Magnetic Resonance: A Review of Models, Optimization Functions, and Optimizers in Traditional Statistics and Neural Networks. Preprints. https://doi.org/10.20944/preprints202409.2252.v1
+#'
+#' Chen, L., Weng, Z., Goh, L., & Garland, M. (2002). An efficient algorithm for automatic phase correction of NMR spectra based on
+#' entropy minimization. Journal of Magnetic Resonance, 158, 1-2.
+#'
+#' Ernst, R. R. (1969). Numerical Hilbert transform and automatic phase correction in magnetic resonance spectroscopy.
+#' Journal of Magnetic Resonance, 1, 7-26
 #'
 #' Liland KH, Almøy T, Mevik B (2010), Optimal Choice of Baseline
 #' Correction for Multivariate Calibration of Spectra, Applied Spectroscopy 64, pp. 1007-1016.
@@ -16,12 +22,12 @@
 
 #' @examples
 #' data("fdat")
-#' mpc_dsm_phased1 <- MPC_DSM(fdat$frequency_domain)
+#' mpc_dsm_phased1 <- MPC_ADSM(fdat$frequency_domain)
 
 #' @export
 
 
-MPC_DSM = function(specdat, withBC = TRUE){
+MPC_ADSM = function(specdat, withBC = TRUE){
 
   cplxDat=specdat
   pp=(Re(cplxDat))**2+(Im(cplxDat))**2
@@ -50,7 +56,7 @@ MPC_DSM = function(specdat, withBC = TRUE){
   valleys=cbind(valleyL,valleyR)
 
   phasedComb=apply(valleys,1,FUN=function(x){
-    res=DSM(cplxDat[x[1]:x[2]])
+    res=ADSM(cplxDat[x[1]:x[2]])
   })
 
   phasedAll=unlist(phasedComb)

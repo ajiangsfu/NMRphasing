@@ -1,6 +1,6 @@
 #' SPC_DSM
-#' @description A single linear model with dispersion summation minimization.
-#' @details This function is to process phase error correction through a single linear model with dispersion summation minimization,
+#' @description A single linear model with absolute dispersion summation minimization.
+#' @details This function is to process phase error correction through a single linear model with absolute dispersion summation minimization,
 #' followed by polynomial baseline correction if necessary
 #' @param specdat A complex number vector of observed frequency domain data
 #' @param withBC A logical parameter that enables/disables baseline correction after baseline correction
@@ -9,8 +9,14 @@
 #' @author Aixiang Jiang
 #' @references
 #'
-#' Binczyk, F., Tarnawski, R., & Polanska, J. (2015). Strategies for optimizing the phase correction algorithms in Nuclear Magnetic Resonance spectroscopy. Biomedical Engineering Online, 14 Suppl 2(Suppl 2), S5. https://doi.org/10.1186/1475-925X-14-S2-S5
+#' Jiang, A. (2024). Phase Error Correction in Magnetic Resonance: A Review of Models, Optimization Functions, and Optimizers in Traditional Statistics and Neural Networks. Preprints. https://doi.org/10.20944/preprints202409.2252.v1
 #'
+#' Chen, L., Weng, Z., Goh, L., & Garland, M. (2002). An efficient algorithm for automatic phase correction of NMR spectra based on
+#' entropy minimization. Journal of Magnetic Resonance, 158, 1-2.
+#'
+#' Ernst, R. R. (1969). Numerical Hilbert transform and automatic phase correction in magnetic resonance spectroscopy.
+#' Journal of Magnetic Resonance, 1, 7-26
+
 #' Liland KH, Almøy T, Mevik B (2010), Optimal Choice of Baseline
 #' Correction for Multivariate Calibration of Spectra, Applied Spectroscopy 64, pp. 1007-1016.
 
@@ -18,12 +24,12 @@
 #'
 #' @examples
 #' data("fdat")
-#' spc_dsm_phased1 <- SPC_DSM(fdat$frequency_domain)
+#' spc_dsm_phased1 <- SPC_ADSM(fdat$frequency_domain)
 
 #' @export
 
 
-SPC_DSM = function (specdat, withBC = TRUE){
+SPC_ADSM = function (specdat, withBC = TRUE){
 
   hdat=cbind(Re(specdat), Im(specdat))
 
@@ -33,7 +39,7 @@ SPC_DSM = function (specdat, withBC = TRUE){
   ph1Initial=0.005
 
   #### get optimized parameters of ph0 and ph1
-  optimRes=stats::optim(par=c(ph0Initial,ph1Initial),fn=sumD, specDat=hdat)
+  optimRes=stats::optim(par=c(ph0Initial,ph1Initial),fn=Abs_sumD, specDat=hdat)
 
   bestPh=optimRes$par
 

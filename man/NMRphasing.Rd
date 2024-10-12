@@ -7,8 +7,8 @@
 NMRphasing(
   specDatIn,
   absorptionOnly = FALSE,
-  method = c("NLS", "MPC_DANM", "MPC_EMP", "MPC_AAM", "MPC_DSM", "SPC_DANM", "SPC_EMP",
-    "SPC_AAM", "SPC_DSM"),
+  method = c("NLS", "MPC_DANM", "MPC_EMP", "MPC_AAM", "MPC_DSM", "MPC_ADSM", "SPC_DANM",
+    "SPC_EMP", "SPC_AAM", "SPC_DSM", "SPC_ADSM"),
   withBC = TRUE
 )
 }
@@ -19,7 +19,7 @@ which 1st column is for absorption spectrum, and 2nd column is for dispersion sp
 
 \item{absorptionOnly}{A logical variable to tell us if specDatIn is a a vector of absorption specrtrum, default is false}
 
-\item{method}{One of phase correction and baseline correction methods. There are nine available choices, which are "NLS", "MPC_DAOM", "MPC_EMP", "MPC_AAM", "MPC_DSM", "SPC_DAOM", "SPC_EMP", "SPC_AAM", "SPC_DSM",
+\item{method}{One of phase correction and baseline correction methods. There are eleven available choices, which are "NLS", "MPC_DAOM", "MPC_EMP", "MPC_AAM", "MPC_DSM", "MPC_ADSM", "SPC_DAOM", "SPC_EMP", "SPC_AAM", "SPC_DSM", "SPC_ADSM",
 with "NLS", non-linear shrinkage as default.}
 
 \item{withBC}{A logical parameter that enables/disables baseline correction after baseline correction}
@@ -31,13 +31,15 @@ A numeric vector of phase corrected absorption spectrum
 Phase error correction wrap up function
 }
 \details{
-This is a wrap function to process phase error correction and baseline correction with nine different choices.
+This is a wrap function to process phase error correction and baseline correction with eleven different choices.
 }
 \examples{
 data("fdat")
 nls_phased <- NMRphasing(specDatIn = fdat$frequency_domain, method = "NLS")
 }
 \references{
+Jiang, A. (2024). Phase Error Correction in Magnetic Resonance: A Review of Models, Optimization Functions, and Optimizers in Traditional Statistics and Neural Networks. Preprints. https://doi.org/10.20944/preprints202409.2252.v1
+
 Binczyk F, Tarnawski R, Polanska J (2015) Strategies for optimizing the phase correction algorithms in Nuclear Magnetic Resonance spectroscopy. Biomed Eng Online 14 Suppl 2:S5.
 
 Chen L, Weng Z, Goh L, Garland M (2002) An efficient algorithm for automatic phase correction of NMR spectra based on entropy minimization. J Magn Reson 158:164–168.
