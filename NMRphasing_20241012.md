@@ -2,27 +2,26 @@ NMRphasing: An R Package for 1D NMR Phase Error Correction
 
 Aixiang Jiang ^\[a,b,c\]^ \* and Robert Nadon^\[d\]^ \*\*
 
-  -----------------------------------------------------------------------
-  **Abstract:** Nuclear magnetic      accuracy of chemical compound
-  resonance (NMR) spectroscopy is     identification and quantification.
-  widely employed for the             To address this challenge, we
-  identification and quantification   introduce the NMRphase R package,
-  of chemical compounds. However, the which incorporates innovative phase
-  presence of phase errors in NMR     error correction methods capable of
-  data, where signal timing deviates  handling all types of phase errors
-  from the true phase, necessitates   while preserving existing
-  correction to prevent significant   correction techniques. While
-  distortions. Current methods,       designed primarily for 1D NMR data,
-  relying on a single simple linear   NMRphase can also be applied to 2D
-  regression model, face challenges   and 3D NMR data by processing one
-  in correcting nonlinear phase       1D NMR data file at a time.
-  errors, resulting in residual phase 
-  errors. This limitation leads to    
-  residual phase distortions that can 
-  impact the                          
-  ----------------------------------- -----------------------------------
-  **Keywords:** NMR, phase error,     
-  phase error correction              
+
+**Abstract**
+
+Nuclear magnetic resonance (NMR) spectroscopy is widely employed to
+identify and quantify chemical compounds. However, the presence of phase
+errors in NMR data, where signal timing deviates from the true phase,
+requires correction to prevent significant distortions. Current methods,
+relying on a single simple linear regression model, face challenges in
+correcting nonlinear phase errors, resulting in residual phase errors.
+This limitation leads to residual phase distortions that can impact the
+accuracy of chemical compound identification and quantification. To
+address this challenge, we introduce the NMRphase R package, which
+incorporates innovative phase error correction methods capable of
+handling all types of phase errors while preserving existing correction
+techniques. While designed primarily for 1D NMR data, NMRphase can also
+be applied to 2D and 3D NMR data by processing one 1D NMR data file at a
+time.
+ 
+ 
+**Keywords:** NMR, phase error, phase error correction              
 
   -----------------------------------------------------------------------
 
