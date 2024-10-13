@@ -1,6 +1,27 @@
-NMRphasing: An R Package for 1D NMR Phase Error Correction
+docker run --rm \
+    --volume $PWD/paper:/data \
+    --user $(id -u):$(id -g) \
+    --env JOURNAL=joss \
+    openjournals/inara
 
-Aixiang Jiang ^\[a,b,c\]^ \* and Robert Nadon^\[d\]^ \*\*
+---
+title: "NMRphasing: An R Package for 1D NMR Phase Error Correction"
+authors:
+  - name: Aixiang Jiang
+    affiliation: [1, 2, 3]
+  - name: Robert Nadon
+    affiliation: [4]
+
+affiliations:
+  - index: 1
+    name: "Department of Epidemiology, Biostatistics, and Occupational Health, McGill University, Montreal, Quebec, Canada"
+  - index: 2
+    name: "Department of Pathology and Laboratory Medicine, University of British Columbia, Vancouver, British Columbia, Canada"
+  - index: 3
+    name: "British Columbia Cancer Centre for Lymphoid Cancer, Vancouver, British Columbia, Canada"
+  - index: 4
+    name: "Department of Human Genetics, McGill University, Montreal, Quebec, Canada"
+---
 
 
 **Abstract**
