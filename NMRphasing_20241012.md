@@ -91,9 +91,9 @@ propose novel approaches to correct phase errors in NMR spectroscopy,
 addressing non-linear phase errors, and create a new optimization
 function.
 
-![](media/image3.jpg){width="7.008333333333334in"
-height="4.3125in"}Figure 1: Three phase error correction approaches in
-NMRphasing R package
+![Figure 1: Three phase error correction approaches in NMRphasing R package](./Figure1_phaseCorrectionApproaches.pdf)
+
+Figure 1: Three phase error correction approaches in NMRphasing R package
 
 Methods
 
@@ -581,8 +581,9 @@ MPC_DSM is still slightly better than SPC_DSM. When we switch from DSM
 to ADSM, both SPC_ADSM and MPC_ADSM perform significantly better than
 SPC_DSM and MPC_DSM, respectively.
 
-![](media/image4.jpeg){width="7.008333333333334in"
-height="7.884722222222222in"}Figure 2: Comparison of different phase
+![Figure 2: Comparison of different phase error correction methods.](./Figure2_PhaseCorrection.pdf)
+
+Figure 2: Comparison of different phase
 error correction methods. A: original example data; B: NLS; C: SPC_AAM;
 D: MPC_AAM; E: SPC_EMP; F: MPC_EMP; G: SPC_DANM; H: MPC_DANM; I:
 SPC_DSM; J: MPC_DSM, K: SPC_ADSM; L: MPC_DSM.
