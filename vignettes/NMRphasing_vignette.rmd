@@ -2,7 +2,13 @@
 title: "NMRphasing"
 author: "Aixiang Jiang"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+  pdf_document:
+    toc: true
+    toc_depth: 2
 vignette: >
   %\VignetteIndexEntry{NMRphasing}
   %\VignetteEngine{knitr::rmarkdown}
@@ -53,7 +59,7 @@ str(fdat)
 In the code above, we load the dataset 'fdat' from the package. 'fdat$frequency_domain' represents the complex vector used in the following illustration, while 'freq' is utilized for plotting purposes. If your NMR data uses ppm values, you can substitute 'ppm' accordingly.
 
 
-```{r dpi = 200}
+```{r dpi = 96}
 
 ## in order to make comparison, absorption part can be extracted
 fdat$Observed_Absorption = Re(fdat$frequency_domain)
@@ -101,7 +107,7 @@ fdat$Phased_Absoprtion = NMRphasing(specDatIn = fdat$frequency_domain, method = 
 ### 2. SPC_DANM
 The "SPC_DANM" method employs the traditional single linear model approach for phase error correction but incorporates a new optimization function designed to minimize the difference between absolute area and net area.
 
-```{r dpi = 200}
+```{r dpi = 96}
 
 fdat$Phased_Absoprtion = NMRphasing(specDatIn = fdat$frequency_domain, method = "SPC_DANM") 
 
@@ -120,7 +126,7 @@ ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),font.label = list(
 
 This approach utilizes our new multiple linear model for phase error correction along with our optimization function designed to minimize the difference between absolute area and net area.
 
-```{r dpi = 200}
+```{r dpi = 96}
 fdat$Phased_Absoprtion = NMRphasing(specDatIn = fdat$frequency_domain, method = "MPC_DANM") 
 
 p2 = ggplot(fdat, aes(x = ppm, y = Phased_Absoprtion)) +
@@ -137,7 +143,7 @@ ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),font.label = list(
 
 This is an old phase error correction method based on the traditional single model approach targeting on an existing optimization function: entropy minimization with negative peak penalty.
 
-```{r dpi = 200}
+```{r dpi = 96}
 fdat$Phased_Absoprtion = NMRphasing(specDatIn = fdat$frequency_domain, method = "SPC_EMP") 
 
 p2 = ggplot(fdat, aes(x = ppm, y = Phased_Absoprtion)) +
@@ -154,7 +160,7 @@ ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),font.label = list(
 
 This is to apply our new multiple linear model approach for phase error correction based on an existing optimization function: entropy minimization with negative peak penalty.
 
-```{r dpi = 200}
+```{r dpi = 96}
 fdat$Phased_Absoprtion = NMRphasing(specDatIn = fdat$frequency_domain, method = "MPC_EMP") 
 
 p2 = ggplot(fdat, aes(x = ppm, y = Phased_Absoprtion)) +
@@ -172,7 +178,7 @@ ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),font.label = list(
 
 This is an old phase error correction method based on the traditional single model approach with an existing optimization function: absolute area minimization.
 
-```{r dpi = 200}
+```{r dpi = 96}
 fdat$Phased_Absoprtion = NMRphasing(specDatIn = fdat$frequency_domain, method = "SPC_AAM") 
 
 p2 = ggplot(fdat, aes(x = ppm, y = Phased_Absoprtion)) +
@@ -188,7 +194,7 @@ ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),font.label = list(
 
 This is to apply our new multiple linear model approach for phase error correction based on an existing optimization function:absolute area minimization.
 
-```{r dpi = 200}
+```{r dpi = 96}
 fdat$Phased_Absoprtion = NMRphasing(specDatIn = fdat$frequency_domain, method = "MPC_AAM") 
 
 p2 = ggplot(fdat, aes(x = ppm, y = Phased_Absoprtion)) +
@@ -205,7 +211,7 @@ ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),font.label = list(
 
 This is an old phase error correction method based on the traditional single model approach with an existing optimization function: summation minimization on dispersion.
 
-```{r dpi = 200}
+```{r dpi = 96}
 fdat$Phased_Absoprtion = NMRphasing(specDatIn = fdat$frequency_domain, method = "SPC_DSM") 
 
 p2 = ggplot(fdat, aes(x = ppm, y = Phased_Absoprtion)) +
@@ -222,7 +228,7 @@ ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),font.label = list(
 
 This is to apply our new multiple linear model approach for phase error correction based on an existing optimization function: summation minimization on dispersion.
 
-```{r dpi = 200}
+```{r dpi = 96}
 fdat$Phased_Absoprtion = NMRphasing(specDatIn = fdat$frequency_domain, method = "MPC_DSM") 
 
 p2 = ggplot(fdat, aes(x = ppm, y = Phased_Absoprtion)) +
@@ -239,7 +245,7 @@ ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),font.label = list(
 
 This is a phase error correction method based on the traditional single model approach with an optimization function: absolute summation minimization on dispersion.
 
-```{r dpi = 200}
+```{r dpi = 96}
 fdat$Phased_Absoprtion = NMRphasing(specDatIn = fdat$frequency_domain, method = "SPC_ADSM") 
 
 p2 = ggplot(fdat, aes(x = ppm, y = Phased_Absoprtion)) +
@@ -256,7 +262,7 @@ ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),font.label = list(
 
 This is to apply our new multiple linear model approach for phase error correction based on an optimization function: absolute summation minimization on dispersion.
 
-```{r dpi = 200}
+```{r dpi = 96}
 fdat$Phased_Absoprtion = NMRphasing(specDatIn = fdat$frequency_domain, method = "MPC_ADSM") 
 
 p2 = ggplot(fdat, aes(x = ppm, y = Phased_Absoprtion)) +
@@ -273,7 +279,7 @@ ggarrange(plotlist = list(p1,p2),labels = c("Before","After"),font.label = list(
 
 ## IV. NMRphasing R package general information
 
-Version: 1.0.5
+Version: 1.0.6
 Authors@R: c(
   person("Aixiang", "Jiang", role = c("aut", "cre", "cph"), 
          email = "aijiang@bccrc.ca",

@@ -58,9 +58,11 @@ If your NMR data uses ppm values, you can substitute ‘ppm’ accordingly.
 
     library(ggpubr)
 
+    ## Warning: package 'ggpubr' was built under R version 4.4.2
+
     ## Loading required package: ggplot2
 
-    ## Warning: package 'ggplot2' was built under R version 4.3.3
+    ## Warning: package 'ggplot2' was built under R version 4.4.2
 
     p1 = ggplot(fdat, aes(x = ppm, y = Observed_Absorption)) +
           geom_line() + theme_bw() + labs(y = "Observed Absorption") +
@@ -292,7 +294,7 @@ minimization on dispersion.
 
 ## IV. NMRphasing R package general information
 
-Version: 1.0.5 <Authors@R>: c( person(“Aixiang”, “Jiang”, role =
+Version: 1.0.6 <Authors@R>: c( person(“Aixiang”, “Jiang”, role =
 c(“aut”, “cre”, “cph”), email = “<aijiang@bccrc.ca>”, comment = c(ORCID
 = “0000-0002-6153-7595”)) ) Maintainer: Aixiang Jiang <aijiang@bccrc.ca>
 Depends: R (&gt;= 4.3.0),stats Suggests: knitr, rmarkdown, ggpubr
